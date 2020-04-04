@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="../assets/css/nv.d3.css" rel="stylesheet" type="text/css">
+    <script src="../assets/js/d3.min.js" charset="utf-8"></script>
+    <script src="../assets/js/nv.d3.js"></script>
+
+    <style>
+        text {
+            font: 10px sans-serif;
+        }
+        svg {
+            display: block;
+        }
+        html, body, #barchart1, svg {
+            margin: 1px;
+            padding: 1px;
+            height: 90%;
+            width: 90%;
+        }
+    </style>
+
+</head>
+<body>
+<nav>
+    <ul>Question1: Have the number of crimes happened in Los Angeles
+        increased in the last 5 years?</ul>
+</nav>
+<div id="barchart1">
+    <svg></svg>
+</div>
+
+<script>
+
+    BarChart = [
+        {
+            key: "Cumulative Return",
+            values: [
+                {
+                    "label" : "2015" ,
+                    "value" : 214933
+                } ,
+                {
+                    "label" : "2016" ,
+                    "value" : 225864
+                } ,
+                {
+                    "label" : "2017" ,
+                    "value" : 231565
+                } ,
+                {
+                    "label" : "2018" ,
+                    "value" : 230436
+                } ,
+                {
+                    "label" : "2019" ,
+                    "value" : 220301
+                }
+            ]
+        }
+    ];
+
+    nv.addGraph(function() {
+        var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .margin({left: 150})
+            .showValues(true)
+            .showYAxis(true)
+            .showXAxis(true)
+            .duration(200)
+            ;
+        chart.xAxis
+            .axisLabel("Year")
+            .tickFormat(d3.format(',r'))
+            ;
+
+        chart.yAxis
+            .axisLabel('Population')
+            .tickFormat(d3.format(',r'))
+            ;
+
+        d3.select('#barchart1 svg')
+            .datum(BarChart)
+            .call(chart);
+
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+
+
+</script>
+<p>Conclusion: According to the visualization result of the data in the past five years, the number of crimes in 2015 is still more than 215000. But by 2017, the number of crimes reached the peak, and then slightly decreased, slowly reaching about 220000 by 2019, so the corresponding crime governance situation has become better in the last two years.</p>
+</body>
+</html>

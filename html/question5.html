@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.js"></script>
+</head>
+
+
+<body>
+<nav>
+    <ul>Question5: Is there a correlation between different crime(e.g.
+        robbery and ripe)?</ul>
+</nav>
+<div id="chart"></div>
+
+
+<script type="text/javascript">
+    var margin = {top: 0, right: 30, bottom: 30, left: 120},
+        width = 1000 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom,
+        colors = d3.scaleLinear()
+                    .range(["white","red"])
+                    .domain([-1,1]),
+        crimes = ['burglary','burglary_from_vehicle','partner_assault','simple_assault','theft_of_identity','theft_plain','vandalism','vehicle_stolen'];
+
+    var svg = d3.select("#chart").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleBand()
+            .range([0,width])
+            .domain(crimes)
+            .padding(0.01);
+    svg.append("g")
+        .attr("transform","translate(0,"+height+")")
+        .call(d3.axisBottom(x));
+
+    var y = d3.scaleBand()
+                .range([height,0])
+                .domain(crimes)
+                .padding(0.1);
+
+    svg.append("g")
+        .call(d3.axisLeft(y));
+
+    d3.csv("data/cor.csv", function(err,data) {
+        if(err){console.log("error")};
+        console.log(data);
+        // create a tooltip
+        var tooltip = d3.select("#chart")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("padding", "5px")
+
+        var mouseover = function(d) {
+            tooltip.style("opacity", 1)
+        }
+        var mousemove = function(d) {
+            tooltip
+                .html("The correlation value of "+d.crime1+" and "+d.crime2+" is: " + d.value)
+                .style("left", (d3.mouse(this)[0]+70) + "px")
+                .style("top", (d3.mouse(this)[1]) + "px")
+        }
+        var mouseleave = function(d) {
+            tooltip.style("opacity", 0)
+        }
+
+        // add the squares
+        svg.selectAll()
+            .data(data, function(d) {return d.crime1+':'+d.crime2;})
+            .enter()
+            .append("rect")
+            .attr("x", function(d) { return x(d.crime1) })
+            .attr("y", function(d) { return y(d.crime2) })
+            .attr("width", x.bandwidth() )
+            .attr("height", y.bandwidth() )
+            .style("fill", function(d) { return colors(d.value)} )
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave)
+    })
+</script>
+<p>Conclusion: I visualized the results with Heatmap by calculating the correlation coefficient between the top eight crimes in the past five years. From the results, the theft of identity is positively related to the burgery, and partner default and vehicle stolen are the same, which means that these two kinds of crimes often occur together. However, there is a negative correlation between burgery and simple asset, indicating that there is not much relationship between them.</p>
+</body>
+</html>

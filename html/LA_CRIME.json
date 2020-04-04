@@ -1,0 +1,27 @@
+{
+  "children":
+  [
+    { "name": "77th Street", 	"weight": 75027 },
+    { "name": "Central", 	"weight": 59800 },
+    { "name": "Devonshire", 	"weight": 49858 },
+    { "name": "Foothill", 	"weight": 39837 },
+    { "name": "Harbor", 	"weight": 46687 },
+    { "name": "Hollenbeck", 	"weight": 43637 },
+    { "name": "Hollywood", 	"weight": 54393 },
+    { "name": "Mission", 	"weight": 52210 },
+    { "name": "N Hollywood", 	"weight": 59752 },
+    { "name": "Newton", 	"weight": 54145 },
+    { "name": "Northeast", 	"weight": 51296 },
+    { "name": "Olympic", 	"weight": 53068 },
+    { "name": "Pacific", 	"weight": 60177 },
+    { "name": "Rampart", 	"weight": 47497 },
+    { "name": "Southeast", 	"weight": 58420 },
+    { "name": "Southwest", 	"weight": 70576 },
+    { "name": "Topanga", 	"weight": 52162 },
+    { "name": "Van Nuys", 		"weight": 51984 },
+    { "name": "West LA", 	"weight": 47620 },
+    { "name": "West Valley", 	"weight": 46422 },
+    { "name": "Wilshire", 	"weight": 48531 }
+  ]
+}
+

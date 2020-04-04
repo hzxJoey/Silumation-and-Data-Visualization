@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="../assets/css/nv.d3.css" rel="stylesheet" type="text/css">
+    <script src="../assets/js/d3.min.js" charset="utf-8"></script>
+    <script src="../assets/js/nv.d3.js"></script>
+    <script src="../assets/js/stream_layers.js"></script>
+
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+        svg {
+            display: block;
+            float: left;
+            height: 350px !important;
+            width: 350px !important;
+        }
+        html, body {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>Question3: Is there a regional variation in different kinds of
+        crime?</ul>
+</nav>
+<div>
+<svg id="street" class="mypiechart"></svg>
+<svg id="pacific" class="mypiechart"></svg>
+<svg id="southwest" class="mypiechart"></svg>
+</div>
+<script>
+
+    var street_crime = [
+        {key: "VEHICLE STOLEN", y: 7241},
+        {key: "AGGRAVATED ASSAULT", y: 6463},
+        {key: "SIMPLE ASSAULT", y: 6181},
+        {key: "PARTNER ASSAULT", y: 6060},
+        {key: "ROBBERY", y: 5282}
+    ];
+    var pacific_crime = [
+        {key: "THEFT PLAIN", y:6318},
+        {key: "BURGLARY", y: 4947},
+        {key: "BURGLARY FROM VEHICLE", y: 4920},
+        {key: "VEHICLE STOLEN", y: 4432},
+        {key: "THEFT", y: 4165}
+    ];
+    var southwest_crime = [
+        {key: "SIMPLE ASSAULT", y:6174},
+        {key: "THEFT PLAIN", y: 5030},
+        {key: "PARTNER ASSAULT", y: 4584},
+        {key: "VEHICLE STOLEN", y: 4578},
+        {key: "BURGLARY FROM VEHICLE", y: 4109}
+    ];
+    var height = 350;
+    var width = 350;
+
+    nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.key })
+            .y(function(d) { return d.y })
+            .width(width)
+            .height(height)
+            .showTooltipPercent(true);
+
+
+
+        d3.select("#street")
+            .datum(street_crime)
+            .transition().duration(1000)
+            .attr('width', width)
+            .attr('height', height)
+            .call(chart);
+
+        chart.pie.donutLabelsOutside(true).donut(true);
+        return chart;
+    });
+
+    nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.key })
+            .y(function(d) { return d.y })
+            .width(width)
+            .height(height)
+            .showTooltipPercent(true);
+
+        d3.select("#pacific")
+            .datum(pacific_crime)
+            .transition().duration(1000)
+            .attr('width', width)
+            .attr('height', height)
+            .call(chart);
+
+        chart.pie.donutLabelsOutside(true).donut(true);
+        return chart;
+    });
+
+    nv.addGraph(function() {
+        var chart = nv.models.pieChart()
+            .x(function(d) { return d.key })
+            .y(function(d) { return d.y })
+            .width(width)
+            .height(height)
+            .showTooltipPercent(true);
+
+        d3.select("#southwest")
+            .datum(southwest_crime)
+            .transition().duration(1000)
+            .attr('width', width)
+            .attr('height', height)
+            .call(chart);
+
+        chart.pie.donutLabelsOutside(true).donut(true);
+        return chart;
+    });
+</script>
+<p>In order to study this problem, I chose three regions with the largest number of crimes, 77th street(picture 1), Pacific(picture2) and South West(picture3), and used pie charts to visualize the top five crime types in each region. According to the results, vehicle stolen is a kind of crime in every region, and the types of crime are also concentrated in theft, burgery and simple default. Therefore, it is concluded that the types of crimes in each region are basically the same, which are common small-scale social problems, and will not lead to greater deviation due to the different regions in Los Angeles.</p>
+
+</body>
+</html>

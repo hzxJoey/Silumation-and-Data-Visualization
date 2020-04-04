@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="../assets/css/nv.d3.css" rel="stylesheet" type="text/css">
+    <script src="../assets/js/d3.min.js" charset="utf-8"></script>
+    <script src="../assets/js/nv.d3.js"></script>
+
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+        svg {
+            display: block;
+        }
+        html, body, svg {
+            margin: 0px;
+            padding: 0px;
+            height: 80%;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>Question4: What age group are the main victim in different
+        kinds of crime?</ul>
+</nav>
+<svg id="question4"></svg>
+
+<script>
+    var dataset1 =[];
+    var dataset2 =[];
+    var dataset3 =[];
+    var dataset4 =[];
+    var dataset5 =[];
+    var dataset6 =[];
+    var dataset7 =[];
+    var dataset8 =[];
+
+    d3.csv("data/data_crime_age/data_battery_simple_assault.csv", function(error,data){
+        data.forEach(function(d) {
+            var cx = Number(d.age);
+            var cy = Number(d.num1);
+            dataset1.push([cx,cy]);
+        });
+        console.log(dataset1);
+    });
+
+    d3.csv("data/data_crime_age/data_BURGLARY.csv", function(error,data){
+        data.forEach(function(d) {
+            var cx = Number(d.age);
+            var cy = Number(d.num1);
+            dataset2.push([cx,cy]);
+        });
+        console.log(dataset2);
+    });
+    d3.csv("data/data_crime_age/data_BURGLARY_FROM_VEHICLE.csv", function(error,data){
+        data.forEach(function(d) {
+            var cx = Number(d.age);
+            var cy = Number(d.num1);
+            dataset3.push([cx,cy]);
+        });
+        console.log(dataset3);
+    });
+    d3.csv("data/data_crime_age/data_INTIMATE_PARTNER_SIMPLE_ASSAULT.csv", function(error,data){
+        data.forEach(function(d) {
+            var cx = Number(d.age);
+            var cy = Number(d.num1);
+            dataset4.push([cx,cy]);
+        });
+        console.log(dataset4);
+    });
+    d3.csv("data/data_crime_age/data_THEFT_OF_IDENTITY.csv", function(error,data){
+        data.forEach(function(d) {
+            var cx = Number(d.age);
+            var cy = Number(d.num1);
+            dataset5.push([cx,cy]);
+        });
+        console.log(dataset5);
+    });
+    d3.csv("data/data_crime_age/data_THEFT_PLAIN_under_950.csv", function(error,data){
+        data.forEach(function(d) {
+            var cx = Number(d.age);
+            var cy = Number(d.num1);
+            dataset6.push([cx,cy]);
+        });
+        console.log(dataset6);
+    });
+    d3.csv("data/data_crime_age/data_VANDALISM.csv", function(error,data){
+        data.forEach(function(d) {
+            var cx = Number(d.age);
+            var cy = Number(d.num1);
+            dataset7.push([cx,cy]);
+        });
+        console.log(dataset7);
+    });
+    d3.csv("data/data_crime_age/data_vehicle_stolen.csv", function(error,data){
+        data.forEach(function(d) {
+            var cx = Number(d.age);
+            var cy = Number(d.num1);
+            dataset8.push([cx,cy]);
+        });
+        console.log(dataset8);
+    });
+
+    var histcatexplong = [
+        {
+            "key" : "battery_simple_assault" ,
+           "values":dataset1},
+        {
+            "key" : "BURGLARY" ,
+            "values":dataset2},
+        {
+            "key" : "BURGLARY_FROM_VEHICLE" ,
+            "values":dataset3},
+         {
+             "key" : "INTIMATE_PARTNER_SIMPLE_ASSAULT" ,
+            "values":dataset4},
+        {
+            "key" : "THEFT_OF_IDENTITY" ,
+            "values":dataset5},
+        {
+            "key" : "THEFT_PLAIN_under_950" ,
+            "values":dataset6},
+        {
+            "key" : "VANDALISM" ,
+            "values":dataset7},
+        {
+            "key" : "vehicle_stolen" ,
+            "values":dataset8}
+    ];
+
+    var colors = d3.scale.category20();
+
+    var chart;
+    nv.addGraph(function() {
+        chart = nv.models.stackedAreaChart()
+            .useInteractiveGuideline(true)
+            .x(function(d) { return d[0] })
+            .y(function(d) { return d[1] })
+            .controlLabels({stacked: "Stacked"})
+            .duration(300);
+
+
+        chart.legend.vers('furious');
+
+        d3.select('#question4')
+            .datum(histcatexplong)
+            .transition().duration(1000)
+            .call(chart)
+            .each('start', function() {
+                setTimeout(function() {
+                    d3.selectAll('#question4 *').each(function() {
+                        if(this.__transition__)
+                            this.__transition__.duration = 1;
+                    })
+                }, 0)
+            });
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+</script>
+<p>Conclusion: This picture is the most interesting one I think. I used stackflowchart to visualize the data, and the result is surprising: Although the victims aged 22-40 are the most, there is no significant difference between the victims aged 40-50. Fortunately, minor victims do not account for the vast majority of the proportion reported on the Internet, so the protection of minors is very good. But check the proportion of crime in all age groups, and minors account for the vast majority of the proportion in the battery simple asset, indicating that young people's emotions are more difficult to control and need to be dredged.</p>
+</body>
+</html>

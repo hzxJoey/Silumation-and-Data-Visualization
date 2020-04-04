@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>D3: Loading GeoJSON data and generating SVG paths</title>
+    <script src="../assets/js/d3.min.js"></script>
+    <script src="../assets/js/d3-queue.min.js"></script>
+    <style>
+        .bubble circle{
+            stroke: black;
+            stroke-width: 2px;
+        }
+        .bubble text{
+            fill: black;
+            font-size: 14px;
+            font-family: arial;
+            text-anchor: middle;
+        }
+        svg {
+            display: block;
+        }
+        html, body, svg {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 80%;
+        }
+
+    </style>
+</head>
+<body>
+<nav>
+    <ul>Question2: Which area of Los Angeles has the largest amount
+        of crimes?</ul>
+</nav>
+<div id="bubble" style="height: 500px;background-color:#a9fdff"></div>
+<script type="text/javascript">
+
+    var width  = 780;
+    var height = 500;
+
+    var svg3 = d3.select("#bubble")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    var pack = d3.layout.pack()
+        .size([ width, height ])
+        .sort(null)
+        .value(function(d){
+            return d.weight;
+        })
+        .padding(2);
+
+    d3.json("LA_CRIME.json",function(error, root){
+
+        var nodes = pack.nodes(root);
+
+        console.log(nodes);
+
+        var color = d3.scale.category20c();
+
+        var bubbles = svg3.selectAll(".bubble")
+            .data(nodes.filter(function(d) {
+                return !d.children;
+            }))
+            .enter()
+            .append("g")
+            .attr("class","bubble");
+
+        bubbles.append("circle")
+            .style("fill",function(d,i){
+                return color(i);
+            })
+            .attr("cx",function(d){ return d.x; })
+            .attr("cy",function(d){ return d.y; })
+            .attr("r",function(d){ return d.r; });
+
+        bubbles.append("text")
+            .attr("x",function(d){ return d.x; })
+            .attr("y",function(d){ return d.y; })
+            .text(function(d){
+                return d.name;
+            });
+
+    });
+
+</script>
+<p>Conclusion: I used the bubble chart to show the difference of the total number of top eight crimes in Los Angeles, but the effect was not so obvious, because the difference was not very large. But it can be seen that 77th street, Pacific and South were the three places with the largest number of crimes, so they were relatively the most dangerous. In foothill, it's relatively safe.</p>
+</body>
+
+
+</html>

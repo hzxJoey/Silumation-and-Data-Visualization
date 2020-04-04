@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Coursework2</title>
+    <link rel="stylesheet" href="style/styles.css">
+    <link rel="stylesheet" href="style/pygment_trac.css">
+    <script src="../assets/js/jquery.min.js"></script>
+    <script>
+        $('body').ready(function() {
+            var iframe = document.getElementById('show');
+            var iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+            iframedoc.body.innerHTML = ''
+                + '<br><br>'
+                + '<div style="text-align: center; color: #CCC; font-family: arial; font-size: 14px; font-weight:bold;">'
+                + '</div>';
+            });
+
+
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+</head>
+<body>
+
+<header>
+    <h1>Data Visualization of Coursework2</h1>
+    <p>Los Angeles Crime Analysis</p>
+    <p>Student Number:1905522</p>
+</header>
+
+
+<div class="wrapper">
+    <nav>
+        <ul>Introduction</ul>
+    </nav>
+    <section>
+        <h3>
+            Introduction
+        </h3>
+
+        <p>
+            Due to the continuous spread of new coronaviruses in the United States and the more serious racial discrimination caused by the US President calling the virus "Chinese virus", more crimes have occurred in the United States. At the same time, due to the large number of Chinese in the Los Angeles area, as a Chinese, by analyzing crime data in the area, the analysis conclusions are provided to local friends and partners to help them better avoid possible crimes.
+        </p>
+        <p>To specify the relationship
+            between crimes and other aspects which may affect society’s safety, I downloaded Los Angeles’ crimes data[1]
+            from 2010 to 2019 on Kaggle, which contains more than
+            2 million instances. At the same time, I have selected
+            several questions that my following research will give
+            explanation.
+            </p>
+        <div>
+                <p> <a href="question1.html">Have the number of crimes happened in Los Angeles
+               increased in the last 5 years?</a> </p>
+                <p> <a href="question2.html">Which area of Los Angeles has the largest amount
+                    of crimes?</a> </p>
+                <p> <a href="question3.html">Is there a regional variation in different kinds of
+                    crime?</a> </p>
+                <p> <a href="question4.html">What age group are the main victim in different
+                    kinds of crime?</a> </p>
+                <p> <a href="question5.html">Is there a correlation between different crime(e.g.
+                    robbery and ripe)?</a> </p>
+        </div>
+        <h3>
+            Conclusion
+        </h3>
+        <p>After analyzing the data and finishing my visualization, and answering the questions I proposed, I realized there are more work I can do to perfect my website. Firstly, I should use map to visualize regional data to show the conclusion directly on map. Secondly, the layout of whole website is not good, cause it is hard to learn how to beautify websites when I try to learn how to use javascript at the same time. But, I did answered all the questions and give a good visualization, so the whole overview of los angeles crime would be clear enough.</p>
+        <h3>
+            Reference
+        </h3>
+        <p>[1]Crime Data from 2010 to 2019 | Los Angeles - Open Data Portal (no date). Available at: https://data.lacity.org/A-Safe-City/Crime-Data-from-2010-to-2019/63jg-8b9z (Accessed: 20 February 2020).</p>
+        <p>[2]The Office For National Statistics (2017) ‘Knife Crime in England and Wales: Bulletin Tables’, (November). Available at: www.parliament.uk/commons-library%7Cintranet.parliament.uk/commons-library%7Cpapers@parliament.uk%7C@commonslibrary’Thedarksideoftheknife’,copyright:http://www.loren-godefroy.com%0Ahttps://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/datasets.</p>
+        <p>[3] http://nvd3.org/</p>
+        <p>[4] https://d3js.org/</p>
+        <p>[5]Visualizing New York City Weapon Crimes 2006 – 2017 (no date). Available at: http://mantascode.com/visualizing-new-york-city-weapon-crimes-2006-2017/ (Accessed: 20 February 2020).</p>
+    </section>
+
+</div>
+</body>
+</html>
